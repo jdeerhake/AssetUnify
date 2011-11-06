@@ -6,7 +6,7 @@ AssetUnify - asset packaging for PHP.
 Example file structure
 ----------------------
 
-File locations can be configured, but for the sake of simplicity the examples use the default file structure, outlined below:
+File locations can be configured, but for the simplicity's sake the examples use the default file structure, outlined below:
 
 
     DOCUMENT_ROOT
@@ -53,7 +53,7 @@ Create a file at DOCUMENT_ROOT/config/assets.json.  Define packages using JSON l
       }
     }
 
-File extensions are optional, and assumed to be .js/.css if omitted.
+File extensions are optional, and assumed to be .js/.css if omitted.  Order within each package is maintained.
 
 
 Including a "directory" key under either scripts or stylesheet will set the directory where they are located (relative to DOCUMENT_ROOT, defaults are javascripts and stylesheets, respectively):
@@ -90,7 +90,10 @@ Usage
 
 After including asset_unify.php, add `AssetUnify\Packager::$env = "development";`.  This sets the env mode - currently only "development" will do anything, and it will simply keep all of the scripts/stylesheets in separate tags and not run minification on them.
 
-To include packages on the page add `echo AssetUnify\include_stylesheets("dogs");`.  This function will return a string containing appropriate tags.  Optionally you can pass a second argument, a configuration object, to this function.  Currently the only meaningful key is "type" which when given the value "inline" will render the asset in the page - `echo AssetUnify\include_stylesheets("dogs", array("type" => "inline"));`.
+To include packages on the page add `echo AssetUnify\include_stylesheets("dogs");`.  This function will return a string containing appropriate tags.   You can also call this function with an array to include multiple packages at once `echo AssetUnify\include_stylesheets(array("cats", "dogs"));`.  Package order is maintained.
+
+
+Optionally you can pass a second argument, a configuration object, to this function.  Currently the only meaningful key is "type" which when given the value "inline" will render the asset in the page - `echo AssetUnify\include_stylesheets("dogs", array("type" => "inline"));`.
 
 Example page:
 
