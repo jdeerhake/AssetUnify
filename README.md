@@ -1,6 +1,8 @@
 AssetUnify - asset packaging for PHP.
 ====================================
 
+(It doesn't actually do packaging yet, but it can manage packages)
+
 Example file structure
 ----------------------
 
@@ -86,9 +88,9 @@ Would cause the contents of each file to run through the global function "run_js
 Usage
 -----
 
-After including asset_unify.php, add `AssetUnify\Packager::$env = "development";`.  This sets the env mode - currently only "development" will do work, and it will simple keep all of the scripts/stylesheets in separate tags and not run minification on them.
+After including asset_unify.php, add `AssetUnify\Packager::$env = "development";`.  This sets the env mode - currently only "development" will do anything, and it will simply keep all of the scripts/stylesheets in separate tags and not run minification on them.
 
-To include packages on the page add `echo AssetUnify\include_stylesheets("dogs");`.  This function will return a string containing appropriate tags.  Optionally you can pass a second configuration object to this function.  Currently the only meaningful key is "type" which when given the value "inline" will render the asset in the page - `echo AssetUnify\include_stylesheets("dogs", array("type" => "inline"));`.
+To include packages on the page add `echo AssetUnify\include_stylesheets("dogs");`.  This function will return a string containing appropriate tags.  Optionally you can pass a second argument, a configuration object, to this function.  Currently the only meaningful key is "type" which when given the value "inline" will render the asset in the page - `echo AssetUnify\include_stylesheets("dogs", array("type" => "inline"));`.
 
 Example page:
 
@@ -100,11 +102,32 @@ Example page:
     <html>
       <head>
         <?= AssetUnify\include_stylesheets("dogs"); //Can pass just string name of a package ?>
-        <?= AssetUnify\include_stylesheets("cat", array("type" => "inline")); //Render in-page ?>
+        <?= AssetUnify\include_stylesheets("cats", array("type" => "inline")); //Render in-page ?>
       </head>
       <body>
         ...
         <?= AssetUnify\include_scripts(array("dogs", "cats")); //Or an array naming multiple packages ?>
+      </body>
+    </html>
+
+Example output:
+
+    <!doctype html>
+    <html>
+      <head>
+        <link rel='stylesheet' type='text/css' media='all' href='/stylesheets/greyhound.css' />
+        <link rel='stylesheet' type='text/css' media='all' href='/stylesheets/shephard.css' />
+        <style type='text/css'>
+          .cheetah { color: blue; }
+          .leopard { font-size: 20px; }
+        </style>
+      </head>
+      <body>
+        ...
+        <script type='text/javascript' src='/javascripts/greyhound.js'></script>
+        <script type='text/javascript' src='/javascripts/shephard.js'></script>
+        <script type='text/javascript' src='/javascripts/cheetah.js'></script>
+        <script type='text/javascript' src='/javascripts/leopard.js'></script>
       </body>
     </html>
 
