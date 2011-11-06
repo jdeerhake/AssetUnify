@@ -36,7 +36,7 @@ File locations can be configured, but for the simplicity's sake the examples use
 Configuration
 ------------
 
-Create a file at DOCUMENT_ROOT/config/assets.json.  Define packages using JSON like so:
+Create a file at `DOCUMENT_ROOT/config/assets.json`.  Define packages using JSON like so:
 
     {
       "scripts" : {
@@ -68,7 +68,7 @@ Including a "directory" key under either scripts or stylesheet will set the dire
       }
     }
 
-To run minification or any sort of modifcation on the assets, provide a "minify" key.  Its value should be the function name that the files contents should be called with. For example:
+To run minification or any sort of modifcation on the assets, provide a "minify" key.  Its value should be the function name that should be called with each file's contents. For example:
 
     {
       "scripts" : {
@@ -90,10 +90,10 @@ Usage
 
 After including asset_unify.php, add `AssetUnify\Packager::$env = "development";`.  This sets the env mode - currently only "development" will do anything, and it will simply keep all of the scripts/stylesheets in separate tags and not run minification on them.
 
-To include packages on the page add `echo AssetUnify\include_stylesheets("dogs");`.  This function will return a string containing appropriate tags.   You can also call this function with an array to include multiple packages at once `echo AssetUnify\include_stylesheets(array("cats", "dogs"));`.  Package order is maintained.
+To include packages on the page add `echo AssetUnify\include_stylesheets("dogs");`.  This function will return a string containing appropriate tags.   You can also call this function with an array to include multiple packages at once - `echo AssetUnify\include_stylesheets(array("cats", "dogs"));`.  Package order is maintained.
 
 
-Optionally you can pass a second argument, a configuration object, to this function.  Currently the only meaningful key is "type" which when given the value "inline" will render the asset in the page - `echo AssetUnify\include_stylesheets("dogs", array("type" => "inline"));`.
+Optionally you can pass a second argument, a configuration object, to this function.  Currently the only meaningful key is "type" which when given the value "inline" will render the assets in the page - `echo AssetUnify\include_stylesheets("dogs", array("type" => "inline"));`.
 
 Example page:
 
