@@ -54,7 +54,7 @@ Create a file at DOCUMENT_ROOT/config/assets.json.  Define packages using JSON l
 File extensions are optional, and assumed to be .js/.css if omitted.
 
 
-Include a "directory" key under either scripts or stylesheet will set the directory where they are located (relative to DOCUMENT_ROOT, defaults are javascripts and stylesheets, respectively):
+Including a "directory" key under either scripts or stylesheet will set the directory where they are located (relative to DOCUMENT_ROOT, defaults are javascripts and stylesheets, respectively):
 
     {
       "scripts" : {
@@ -86,6 +86,10 @@ Would cause the contents of each file to run through the global function "run_js
 Usage
 -----
 
+After including asset_unify.php, add `AssetUnify\Packager::$env = "development";`.  This sets the env mode - currently only "development" will do work, and it will simple keep all of the scripts/stylesheets in separate tags and not run minification on them.
+
+To include packages on the page add `echo AssetUnify\include_stylesheets("dogs");`.  This function will return a string containing appropriate tags.  Optionally you can pass a second configuration object to this function.  Currently the only meaningful key is "type" which when given the value "inline" will render the asset in the page - `echo AssetUnify\include_stylesheets("dogs", array("type" => "inline"));`.
+
 Example page:
 
     <?php
@@ -96,6 +100,7 @@ Example page:
     <html>
       <head>
         <?= AssetUnify\include_stylesheets("dogs"); //Can pass just string name of a package ?>
+        <?= AssetUnify\include_stylesheets("cat", array("type" => "inline")); //Render in-page ?>
       </head>
       <body>
         ...
