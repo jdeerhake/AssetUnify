@@ -33,7 +33,7 @@ File locations can be configured, but for the simplicity's sake the examples use
 
 
 
-Configration
+Configuration
 ------------
 
 Create a file at DOCUMENT_ROOT/config/assets.json.  Define packages using JSON like so:
