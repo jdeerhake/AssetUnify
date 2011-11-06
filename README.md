@@ -1,6 +1,36 @@
 AssetUnify - asset packaging for PHP.
 ====================================
 
+Example file structure
+----------------------
+
+File locations can be configured, but for the sake of simplicity the examples use the default file structure, outlined below:
+
+
+    DOCUMENT_ROOT
+    │
+    ├── lib
+    │   └── asset_unify.php
+    │
+    ├── config
+    │   └── assets.json
+    │
+    ├── stylesheets
+    │   ├── leopard.css
+    │   ├── cheetah.css
+    │   ├── greyhound.css
+    │   └── shephard.css
+    │
+    ├── javascripts
+    │   ├── leopard.js
+    │   ├── cheetah.js
+    │   ├── greyhound.js
+    │   └── shephard.js
+    │
+    └── index.php
+
+
+
 Configration
 ------------
 
@@ -9,17 +39,20 @@ Create a file at DOCUMENT_ROOT/config/assets.json.  Define packages using JSON l
     {
       "scripts" : {
         "packages" : {
-          "cats" : ["cheetah", "leopard"],
-          "dogs" : ["greyhound", "shephard"]
+          "cats" : ["cheetah.js", "leopard.js"],
+          "dogs" : ["greyhound.js", "shephard.js"]
         }
       },
       "stylesheets" : {
         "packages" : {
-          "cats" : ["cheetah", "leopard"],
-          "dogs" : ["greyhound", "shephard"]
+          "cats" : ["cheetah.css", "leopard.css"],
+          "dogs" : ["greyhound.css", "shephard.css"]
         }
       }
     }
+
+File extensions are optional, and assumed to be .js/.css if omitted.
+
 
 Include a "directory" key under either scripts or stylesheet will set the directory where they are located (relative to DOCUMENT_ROOT, defaults are javascripts and stylesheets, respectively):
 
@@ -69,34 +102,4 @@ Example page:
         <?= AssetUnify\include_scripts(array("dogs", "cats")); //Or an array naming multiple packages ?>
       </body>
     </html>
-
-
-
-Example file structure
-----------------------
-
-File layout used for the above examples.
-
-
-  DOCUMENT_ROOT
-  │
-  ├── lib
-  │   └── asset_unify.php
-  │
-  ├── config
-  │   └── assets.json
-  │
-  ├── stylesheets
-  │   ├── leopard.css
-  │   ├── cheetah.css
-  │   ├── greyhound.css
-  │   └── shephard.css
-  │
-  ├── javascripts
-  │   ├── leopard.js
-  │   ├── cheetah.js
-  │   ├── greyhound.js
-  │   └── shephard.js
-  │
-  └── index.php
 
