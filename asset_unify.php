@@ -270,14 +270,16 @@ function include_scripts($package_names, $options = array("type" => "external"))
      if(is_javascript_package($package_name)) array_push($packages, Packager::$script_packages[$package_name]);
   }
 
-
+  $output = array();
   foreach($packages as $package) {
     if($options["type"] == "inline") {
-      echo $package->inline_contents() . "\n";
+      array_push($output, $package->inline_contents());
     } else {
-      echo $package->tag() . "\n";
+      array_push($output, $package->tag());
     }
   }
+
+  return join("\n", $output);
 }
 
 
@@ -296,12 +298,15 @@ function include_stylesheets($package_names, $options = array("type" => "externa
      if(is_stylsheet_package($package_name)) array_push($packages, Packager::$stylesheet_packages[$package_name]);
   }
 
+  $output = array();
   foreach($packages as $package) {
     if($options["type"] == "inline") {
-      echo $package->inline_contents() . "\n";
+      array_push($output, $package->inline_contents());
     } else {
-      echo $package->tag() . "\n";
+      array_push($output, $package->tag());
     }
   }
+
+  return join("\n", $output);
 }
 
