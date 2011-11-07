@@ -250,10 +250,6 @@ call_user_func(function() {
   Packager::$stylesheet_packages = $stylesheet_packages;
 });
 
-/*****************************
- *  Initialize
- *****************************/
-
 
 /*****************************
  *  Script API functions
@@ -287,7 +283,7 @@ function include_scripts($package_names, $options = array("type" => "external"))
  *  Stylesheet API functions
  *****************************/
 
-function is_stylsheet_package($name) {
+function is_stylesheet_package($name) {
   return isset(Packager::$stylesheet_packages[$name]);
 }
 
@@ -295,7 +291,7 @@ function is_stylsheet_package($name) {
 function include_stylesheets($package_names, $options = array("type" => "external")) {
   $packages = array();
   foreach((array)$package_names as $package_name) {
-     if(is_stylsheet_package($package_name)) array_push($packages, Packager::$stylesheet_packages[$package_name]);
+     if(is_stylesheet_package($package_name)) array_push($packages, Packager::$stylesheet_packages[$package_name]);
   }
 
   $output = array();
